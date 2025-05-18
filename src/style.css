@@ -1,6 +1,8 @@
 body{
     background-color: #000;
     color: #fff;
+    position: relative;
+    overflow-x: hidden;
 }
 #MainFrame{
     background-image: url("./images/Hollywood collage.webp");
@@ -21,8 +23,6 @@ h1{
 
 nav{
     opacity: 0.5;
-    /* margin-bottom: 20px; */
-    /* background: linear-gradient(to bottom, #f9d423,#ff4e50, #070707); */
     background: linear-gradient(90deg, #ff4e50, #f9d423);
 }
 .nav-link:hover{
@@ -48,4 +48,296 @@ nav{
     display:flex;
     justify-content: center;
     align-items: center;
+}
+.cardContaier{
+    display: flex;
+    align-items: center;
+    perspective: 1000px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 20px 0;
+    width: 100%;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: #ff4e50 #000;
+}
+
+.cardContaier::-webkit-scrollbar {
+    height: 8px;
+}
+
+.cardContaier::-webkit-scrollbar-track {
+    background: #000;
+    border-radius: 10px;
+}
+
+.cardContaier::-webkit-scrollbar-thumb {
+    background: linear-gradient(90deg, #ff4e50, #f9d423);
+    border-radius: 10px;
+}
+
+.MovieHeader{
+    font-size: 50px;
+    font-family: 'Cinzel', serif;
+    text-align: center;
+    margin: 40px 0 20px;
+    position: relative;
+    display: inline-block;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 0 40px;
+}
+
+.MovieHeader::before, .MovieHeader::after {
+    content: '★';
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #ff4e50;
+    font-size: 30px;
+}
+
+.MovieHeader::before {
+    left: 0;
+}
+
+.MovieHeader::after {
+    right: 0;
+}
+
+.MovieHeader {
+    background: linear-gradient(90deg, #ff4e50, #f9d423);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 10px rgba(255, 77, 79, 0.3);
+    position: relative;
+}
+
+.MovieHeader::before, .MovieHeader::after {
+    background: none;
+    -webkit-text-fill-color: #ff4e50;
+}
+
+.card{
+    position: relative;
+    transform-style: preserve-3d;
+    transition: all 0.6s;
+    cursor: pointer;
+    background-color: #030303;
+    color: #fefcfc;
+    border-radius: 10px;
+    padding: 15px;
+    margin: 0 15px;
+    min-width: 300px;
+    width: 390px;
+    height: 300px;
+    flex-shrink: 0;
+}
+.cardBack, .cardFront{
+    position: absolute;  
+    backface-visibility: hidden;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.cardBack{
+    transform: rotateY(180deg);
+    justify-content: center;
+}
+.info {
+    font-size: 16px;
+    text-align: center;
+    margin-top: 20px;
+    overflow-y: auto;
+    max-height: 250px;
+    padding-right: 5px;
+}
+
+.info::-webkit-scrollbar {
+    width: 5px;
+}
+
+.info::-webkit-scrollbar-track {
+    background: #181818;
+    border-radius: 5px;
+}
+
+.info::-webkit-scrollbar-thumb {
+    background: #ff4e50;
+    border-radius: 5px;
+}
+
+.cardFront{
+    z-index: 2;
+}
+.card.is-flipped {
+    transform: rotateY(180deg);
+}
+#RomanticCard{
+    border: 2px solid #ff073a;
+    box-shadow: 0 0 10px #ff04006a;
+}
+#ComedyCard{
+    border: 2px solid #ffff07;
+    box-shadow: 0 0 10px #f2ff006a;
+}
+#FictionCard{
+    border: 2px solid #00f0ff;
+    box-shadow: 0 0 10px #00f0ff6a;
+}
+#HorrorCard{
+    border: 2px solid #8a00ff;
+    box-shadow: 0 0 10px #8a00ff6a;
+}
+.card:hover{
+    transform: scale(1.08);
+    transition: transform 0.3s ease;
+    box-shadow: 0 0 20px rgba(255, 77, 79, 0.8), 0 0 40px rgba(249, 212, 35, 0.5);
+}
+
+.movie_poster {
+    width: 350px;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.heart-icon {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 24px;
+    color: white;
+    z-index: 10;
+    cursor: pointer;
+    transition: color 0.3s;
+    width: 30px;
+    height: 30px;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="24px" height="24px"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.heart-icon.liked {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23ff073a" width="24px" height="24px"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>');
+}
+
+.like-text {
+    position: absolute;
+    top: 45px;
+    right: 12px;
+    font-size: 12px;
+    color: #ff073a;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.like-text.visible {
+    opacity: 1;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-15px);
+    }
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+@keyframes shine {
+    0% {
+        box-shadow: 0 0 5px rgba(255, 77, 79, 0.5);
+    }
+    50% {
+        box-shadow: 0 0 25px rgba(249, 212, 35, 0.8), 0 0 50px rgba(255, 77, 79, 0.5);
+    }
+    100% {
+        box-shadow: 0 0 5px rgba(255, 77, 79, 0.5);
+    }
+}
+
+.card:hover {
+    animation: shine 1.5s infinite;
+}
+
+/* Random Movie Card Styling */
+#random-movie-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    perspective: 1000px;
+}
+
+.random-movie-card {
+    position: relative;
+    transform-style: preserve-3d;
+    transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    cursor: pointer;
+    background-color: #030303;
+    color: #fefcfc;
+    border-radius: 10px;
+    padding: 15px;
+    width: 350px;
+    height: 300px;
+    box-shadow: 0 0 30px rgba(255, 77, 79, 0.8), 0 0 50px rgba(249, 212, 35, 0.7);
+    border: 3px solid;
+    border-image: linear-gradient(45deg, #ff4e50, #f9d423) 1;
+    animation: appear 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.random-movie-card.is-flipped {
+    transform: rotateY(180deg);
+}
+
+.close-button {
+    position: absolute;
+    top: -15px;
+    right: -15px;
+    width: 30px;
+    height: 30px;
+    background-color: #ff4e50;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 20;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    transition: all 0.3s;
+}
+
+.close-button:hover {
+    transform: scale(1.1);
+    background-color: #f9d423;
+}
+
+@keyframes appear {
+    0% {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
 }

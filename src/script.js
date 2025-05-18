@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Initialize Random Movie functionality
+    //Random Movie function
     const randomMovieBtn = document.querySelector('a[href="#Random"]');
     if (randomMovieBtn) {
         randomMovieBtn.addEventListener('click', function(e) {
@@ -8,10 +8,10 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Card flipping functionality
+    // Card flipping function
     initializeCards();
     
-    // Heart icon functionality
+    // Heart icon function
     initializeHeartIcons();
 });
 
@@ -28,7 +28,6 @@ function initializeCards() {
 
 // Card click handler
 function handleCardClick(e) {
-    // Don't flip if clicking on the heart icon
     if (!e.target.classList.contains('heart-icon') && !e.target.closest('.heart-icon')) {
         this.classList.toggle('is-flipped');
     }
@@ -47,7 +46,7 @@ function initializeHeartIcons() {
 
 // Heart icon click handler
 function handleHeartClick(e) {
-    e.stopPropagation(); // Prevent card from flipping
+    e.stopPropagation(); 
     this.classList.toggle('liked');
     
     const likeText = this.nextElementSibling;
@@ -63,27 +62,22 @@ function handleHeartClick(e) {
 
 // Show random movie function
 function showRandomMovie() {
-    // Movie data - you can expand this array
     const movies = [
         { 
-            title: "The Godfather", 
-            image: "https://upload.wikimedia.org/wikipedia/en/1/1c/Godfather_ver1.jpg",
-            info: "Cast: Marlon Brando, Al Pacino<br>IMDb Rating: 9.2/10<br>The aging patriarch of an organized crime dynasty transfers control to his reluctant son."
+            title: "URI", 
+            image: "./images/URI.webp"
         },
         { 
-            title: "Jumanji", 
-            image: "https://upload.wikimedia.org/wikipedia/en/3/3b/Pulp_Fiction_%281994%29_poster.jpg",
-            info: "Cast: Robin Williams, Kirsten Dunst<br>IMDb Rating: 7.0/10<br>A magical board game unleashes jungle hazards upon its players with every turn they take."
+            title: "La La Land", 
+            image: "./images/La  la Land.jpg"
         },
         { 
-            title: "The Dark Knight", 
-            image: "https://upload.wikimedia.org/wikipedia/en/1/1c/The_Dark_Knight_%282008_film%29.jpg",
-            info: "Cast: Christian Bale, Heath Ledger<br>IMDb Rating: 9.0/10<br>Batman faces his ultimate test against the Joker, a criminal mastermind seeking to prove that even the most incorruptible can be corrupted."
+            title: "Yeh jawani hai deewani", 
+            image: "./images/YJHD.webp"
         },
         { 
             title: "DDLJ", 
-            image: "./images/DDLJ.jpg",
-            info: "Cast: Shah Rukh Khan, Kajol<br>IMDb Rating: 8.0/10<br>A young couple falls in love on a European vacation and faces opposition from the girl's traditional father."
+            image: "./images/DDLJ.jpg"
         }
     ];
     
@@ -110,9 +104,6 @@ function showRandomMovie() {
             <div class="cardFront">
                 <img src="${randomMovie.image}" alt="${randomMovie.title}" class="movie_poster">
                 <h3>${randomMovie.title}</h3>
-            </div>
-            <div class="cardBack">
-                <p class="info">${randomMovie.info}</p>
             </div>
         </div>
     `;

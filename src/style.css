@@ -6,7 +6,7 @@ body{
 }
 #MainFrame{
     background-image: url("./images/Hollywood collage.webp");
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: rgba(0, 0, 0, 0.6);
     background-blend-mode: multiply;
 }
 h1{

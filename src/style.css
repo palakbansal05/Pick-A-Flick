@@ -1,0 +1,51 @@
+body{
+    background-color: #000;
+    color: #fff;
+}
+#MainFrame{
+    background-image: url("./images/Hollywood collage.webp");
+    background-color: rgba(0, 0, 0, 0.7);
+    background-blend-mode: multiply;
+}
+h1{
+    text-align: center;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+    background: linear-gradient(90deg, #ff4e50, #f9d423);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;  
+    font-family: 'Cinzel', serif;
+    font-size: 4rem;
+    padding: 300px;
+    font-size: 130px;
+}
+
+nav{
+    opacity: 0.5;
+    /* margin-bottom: 20px; */
+    /* background: linear-gradient(to bottom, #f9d423,#ff4e50, #070707); */
+    background: linear-gradient(90deg, #ff4e50, #f9d423);
+}
+.nav-link:hover{
+    transform: scale(1.1);
+    background-color: rgb(249, 230, 87);
+    color: black;
+    border-radius: 15px;
+}
+.nav-link{
+    font-size: 20px;
+}
+#GenreButton{
+    margin-top: 40px;
+    border: 0px;
+    text-align: center;
+    font-size: 80px;
+    font-family: 'Cinzel', serif;
+    background: linear-gradient(90deg, #ff4e50, #f9d423);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+#GenreHeader{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}

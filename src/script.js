@@ -13,21 +13,21 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Heart icon function
     initializeHeartIcons();
+    initializeFAQ();
 });
 
 // Initialize all cards including any that might be added dynamically
 function initializeCards() {
     const cards = document.querySelectorAll('.card');
     cards.forEach(card => {
-        // Remove any existing click event listeners
         card.removeEventListener('click', handleCardClick);
-        // Add the click event listener
         card.addEventListener('click', handleCardClick);
     });
 }
 
 // Card click handler
 function handleCardClick(e) {
+    // Don't flip if clicking on the heart icon
     if (!e.target.classList.contains('heart-icon') && !e.target.closest('.heart-icon')) {
         this.classList.toggle('is-flipped');
     }
@@ -37,9 +37,7 @@ function handleCardClick(e) {
 function initializeHeartIcons() {
     const heartIcons = document.querySelectorAll('.heart-icon');
     heartIcons.forEach(icon => {
-        // Remove any existing click event listeners
         icon.removeEventListener('click', handleHeartClick);
-        // Add the click event listener
         icon.addEventListener('click', handleHeartClick);
     });
 }
@@ -48,16 +46,35 @@ function initializeHeartIcons() {
 function handleHeartClick(e) {
     e.stopPropagation(); 
     this.classList.toggle('liked');
+}
+
+// Initialize FAQ section
+function initializeFAQ() {
+    const faqItems = document.querySelectorAll('.faq-item');
     
-    const likeText = this.nextElementSibling;
-    likeText.classList.toggle('visible');
-    
-    // Hide the "Liked!" text after 2 seconds
-    if (likeText.classList.contains('visible')) {
-        setTimeout(() => {
-            likeText.classList.remove('visible');
-        }, 2000);
-    }
+    faqItems.forEach(item => {
+        const question = item.querySelector('.faq-question');
+        question.addEventListener('click', () => {
+            // Close other items
+            faqItems.forEach(otherItem => {
+                if (otherItem !== item && otherItem.classList.contains('active')) {
+                    otherItem.classList.remove('active');
+                }
+            });
+            
+            // Toggle active state
+            item.classList.toggle('active');
+        });
+    });
+}
+
+// Check if element is in viewport
+function isElementInViewport(el) {
+    const rect = el.getBoundingClientRect();
+    return (
+        rect.top <= (window.innerHeight || document.documentElement.clientHeight) &&
+        rect.bottom >= 0
+    );
 }
 
 // Show random movie function
@@ -97,10 +114,9 @@ function showRandomMovie() {
     
     // Build the card HTML
     randomMovieContainer.innerHTML = `
-        <div class="random-movie-card" style="transform: translate(${entryPoint.x}px, ${entryPoint.y}px);">
+        <div class="card" id="RomanticCard">
             <div class="close-button">✕</div>
             <i class="heart-icon"></i>
-            <span class="like-text">Liked!</span>
             <div class="cardFront">
                 <img src="${randomMovie.image}" alt="${randomMovie.title}" class="movie_poster">
                 <h3>${randomMovie.title}</h3>
@@ -110,8 +126,8 @@ function showRandomMovie() {
     
     // Start the card animation
     setTimeout(() => {
-        const card = randomMovieContainer.querySelector('.random-movie-card');
-        card.style.transform = 'translate(0, 0)';
+        const card = randomMovieContainer.querySelector('.card');
+        card.style.transform = 'scale(1)';
         
         // Setup event listeners for the random movie card
         setupRandomMovieCard(card);
@@ -183,17 +199,8 @@ function setupRandomMovieCard(card) {
     
     // Heart icon
     const heartIcon = card.querySelector('.heart-icon');
-    const likeText = card.querySelector('.like-text');
-    
     heartIcon.addEventListener('click', function(e) {
         e.stopPropagation();
         this.classList.toggle('liked');
-        likeText.classList.toggle('visible');
-        
-        if (likeText.classList.contains('visible')) {
-            setTimeout(() => {
-                likeText.classList.remove('visible');
-            }, 2000);
-        }
     });
 }
